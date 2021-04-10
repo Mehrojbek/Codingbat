@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.appcodingbat.entity.User;
 import uz.pdp.appcodingbat.payload.ApiResponse;
 import uz.pdp.appcodingbat.payload.UserDto;
+import uz.pdp.appcodingbat.payload.ValidationMessage;
 import uz.pdp.appcodingbat.service.UserService;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
-public class UserController {
+public class UserController extends ValidationMessage {
     @Autowired
     UserService userService;
 
@@ -85,16 +86,4 @@ public class UserController {
 
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }

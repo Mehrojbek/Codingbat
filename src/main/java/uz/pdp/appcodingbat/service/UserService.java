@@ -48,6 +48,11 @@ public class UserService {
         boolean exists = userRepository.existsByEmail(userDto.getEmail());
         if (exists)
             return new ApiResponse("this email exist",false);
+
+        //CHECK EMAIL
+        if (!userDto.getEmail().contains("@"))
+            return new ApiResponse("email is wrong",false);
+
         User user=new User(userDto.getEmail(), userDto.getPassword());
         userRepository.save(user);
         return new ApiResponse("user added",true);

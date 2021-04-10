@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.appcodingbat.entity.Task;
 import uz.pdp.appcodingbat.payload.ApiResponse;
 import uz.pdp.appcodingbat.payload.TaskDto;
+import uz.pdp.appcodingbat.payload.ValidationMessage;
 import uz.pdp.appcodingbat.service.TaskService;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/task")
-public class TaskController {
+public class TaskController extends ValidationMessage {
     @Autowired
     TaskService taskService;
 
@@ -87,16 +88,4 @@ public class TaskController {
 
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }

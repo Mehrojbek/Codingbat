@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.appcodingbat.entity.Answer;
 import uz.pdp.appcodingbat.payload.AnswerDto;
 import uz.pdp.appcodingbat.payload.ApiResponse;
-import uz.pdp.appcodingbat.payload.Sinov;
+import uz.pdp.appcodingbat.payload.ValidationMessage;
 import uz.pdp.appcodingbat.service.AnswerService;
 
 import javax.validation.Valid;
@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/answer")
-public class AnswerController extends Sinov {
+public class AnswerController extends ValidationMessage {
     @Autowired
     AnswerService answerService;
 

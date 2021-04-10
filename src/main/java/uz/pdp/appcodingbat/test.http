@@ -58,6 +58,5 @@ Content-Type: application/json
 
 {
   "text": "my answer",
-  "userId":1,
-  "taskId": 1
+  "userId":1
 }

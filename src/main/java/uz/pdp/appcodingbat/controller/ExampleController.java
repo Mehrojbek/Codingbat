@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.appcodingbat.entity.Example;
 import uz.pdp.appcodingbat.payload.ApiResponse;
 import uz.pdp.appcodingbat.payload.ExampleDto;
+import uz.pdp.appcodingbat.payload.ValidationMessage;
 import uz.pdp.appcodingbat.service.ExampleService;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/example")
-public class ExampleController {
+public class ExampleController extends ValidationMessage {
     @Autowired
     ExampleService exampleService;
 
@@ -85,19 +86,5 @@ public class ExampleController {
 
 
 
-
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 
 }

@@ -7,21 +7,21 @@ import javax.validation.constraints.NotNull;
 @Data
 public class TaskDto {
 
-    @NotNull
+    @NotNull(message = "name should not be null")
     private String name;
 
-    @NotNull
+    @NotNull(message = "text should not be null")
     private String text;
 
     private String solution;
 
-    @NotNull
+    @NotNull(message = "method should not be null")
     private String method;
 
     private String hint;
 
     private boolean hasStar=false;
 
-    @NotNull
+    @NotNull(message = "category id should not be null")
     private Integer categoryId;
 }

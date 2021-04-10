@@ -6,9 +6,9 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class ExampleDto {
-    @NotNull
+    @NotNull(message = "text should not be null")
     private String text;
 
-    @NotNull
+    @NotNull(message = "task id should not be null")
     private Integer taskId;
 }

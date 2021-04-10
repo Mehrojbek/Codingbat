@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import uz.pdp.appcodingbat.entity.Language;
 import uz.pdp.appcodingbat.payload.ApiResponse;
 import uz.pdp.appcodingbat.payload.LanguageDto;
+import uz.pdp.appcodingbat.payload.ValidationMessage;
 import uz.pdp.appcodingbat.service.LanguageService;
 
 import javax.validation.Valid;
@@ -18,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/language")
-public class LanguageController {
+public class LanguageController extends ValidationMessage {
     @Autowired
     LanguageService languageService;
 
@@ -87,16 +88,4 @@ public class LanguageController {
 
 
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
 }
