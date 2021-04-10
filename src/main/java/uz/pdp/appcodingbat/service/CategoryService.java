@@ -3,7 +3,7 @@ package uz.pdp.appcodingbat.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import uz.pdp.appcodingbat.entity.Category;
-import uz.pdp.appcodingbat.entity.Deleted;
+import uz.pdp.appcodingbat.payload.Deleted;
 import uz.pdp.appcodingbat.entity.Language;
 import uz.pdp.appcodingbat.payload.ApiResponse;
 import uz.pdp.appcodingbat.payload.CategoryDto;
@@ -56,7 +56,7 @@ public class CategoryService {
         Optional<Language> optionalLanguage = languageRepository.findById(categoryDto.getLanguageId());
         if (!optionalLanguage.isPresent())
             return new ApiResponse("language not found",false);
-        if (optionalLanguage.get().isActive())
+        if (!optionalLanguage.get().isActive())
             return new ApiResponse("language deleted",false);
 
         Language language = optionalLanguage.get();

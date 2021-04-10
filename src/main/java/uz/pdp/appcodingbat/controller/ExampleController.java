@@ -6,10 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.appcodingbat.entity.Language;
+import uz.pdp.appcodingbat.entity.Example;
 import uz.pdp.appcodingbat.payload.ApiResponse;
-import uz.pdp.appcodingbat.payload.LanguageDto;
-import uz.pdp.appcodingbat.service.LanguageService;
+import uz.pdp.appcodingbat.payload.ExampleDto;
+import uz.pdp.appcodingbat.service.ExampleService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -17,73 +17,73 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/language")
-public class LanguageController {
+@RequestMapping("/example")
+public class ExampleController {
     @Autowired
-    LanguageService languageService;
+    ExampleService exampleService;
+
 
     /**
-     * GET ALL LANGUAGES
-     * @return LANGUAGE LIST
+     * GET ALL EXAMPLE
+     * @return EXAMPLE LIST
      */
     @GetMapping
     public ResponseEntity<?> getAll(){
-        List<Language> languageList = languageService.getAll();
-        return ResponseEntity.ok(languageList);
+        List<Example> exampleList = exampleService.getAll();
+        return ResponseEntity.ok(exampleList);
     }
 
 
 
     /**
-     * GET ONE LANGUAGE WITH ID
+     * GET ONE EXAMPLE WITH ID
      * @param id
      * @return ApiResponse
      */
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Integer id){
-        ApiResponse apiResponse = languageService.getOne(id);
+        ApiResponse apiResponse = exampleService.getOne(id);
         return ResponseEntity.status(apiResponse.isSuccess()?200:404).body(apiResponse.isSuccess()?apiResponse.getObject():apiResponse);
     }
 
 
-
     /**
-     * ADD NEW LANGUAGE WITH LANGUAGE_DTO
-     * @param languageDto
+     * ADD NEW EXAMPLE WITH EXAMPLE_DTO
+     * @param exampleDto
      * @return ApiResponse
      */
     @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody LanguageDto languageDto){
-        ApiResponse apiResponse = languageService.add(languageDto);
+    public ResponseEntity<?> add(@Valid @RequestBody ExampleDto  exampleDto){
+        ApiResponse apiResponse = exampleService.add(exampleDto);
         return ResponseEntity.status(apiResponse.isSuccess()?201:409).body(apiResponse);
     }
 
 
-
     /**
-     * DELETE LANGUAGE WITH ID
+     * DELETE EXAMPLE WITH ID
      * @param id
      * @return ApiResponse
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
-        ApiResponse apiResponse = languageService.delete(id);
-        return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
+        ApiResponse apiResponse = exampleService.delete(id);
+        return ResponseEntity.status(apiResponse.isSuccess()?200:404).body(apiResponse);
     }
-
 
 
     /**
-     * EDIT LANGUAGE WITH ID AND LANGUAGE_DTO
+     * EDIT EXAMPLE WITH ID EXAMPLE_DTO
      * @param id
-     * @param languageDto
+     * @param exampleDto
      * @return ApiResponse
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit(@PathVariable Integer id, @Valid @RequestBody LanguageDto languageDto){
-        ApiResponse apiResponse = languageService.edit(id, languageDto);
+    public ResponseEntity<?> edit(@PathVariable Integer id,@Valid @RequestBody ExampleDto exampleDto){
+        ApiResponse apiResponse = exampleService.edit(id, exampleDto);
         return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
     }
+
+
 
 
 
@@ -99,4 +99,5 @@ public class LanguageController {
         });
         return errors;
     }
+
 }

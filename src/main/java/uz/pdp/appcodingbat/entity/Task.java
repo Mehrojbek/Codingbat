@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name","category_id"}))
 public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

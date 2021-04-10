@@ -10,6 +10,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"text","task_id"}))
 public class Example {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,4 +20,12 @@ public class Example {
 
     @ManyToOne
     private Task task;
+
+    private boolean active=true;
+
+
+    public Example(String text, Task task) {
+        this.text = text;
+        this.task = task;
+    }
 }

@@ -6,10 +6,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
-import uz.pdp.appcodingbat.entity.Language;
+import uz.pdp.appcodingbat.entity.User;
 import uz.pdp.appcodingbat.payload.ApiResponse;
-import uz.pdp.appcodingbat.payload.LanguageDto;
-import uz.pdp.appcodingbat.service.LanguageService;
+import uz.pdp.appcodingbat.payload.UserDto;
+import uz.pdp.appcodingbat.service.UserService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -17,73 +17,71 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/language")
-public class LanguageController {
+@RequestMapping("/user")
+public class UserController {
     @Autowired
-    LanguageService languageService;
+    UserService userService;
+
 
     /**
-     * GET ALL LANGUAGES
-     * @return LANGUAGE LIST
+     * GET ALL USER
+     * @return USER LIST
      */
     @GetMapping
     public ResponseEntity<?> getAll(){
-        List<Language> languageList = languageService.getAll();
-        return ResponseEntity.ok(languageList);
+        List<User> userList = userService.getAll();
+        return ResponseEntity.ok(userList);
     }
 
 
-
     /**
-     * GET ONE LANGUAGE WITH ID
+     * GET ONE USER WITH ID
      * @param id
      * @return ApiResponse
      */
     @GetMapping("/{id}")
     public ResponseEntity<?> getOne(@PathVariable Integer id){
-        ApiResponse apiResponse = languageService.getOne(id);
+        ApiResponse apiResponse = userService.getOne(id);
         return ResponseEntity.status(apiResponse.isSuccess()?200:404).body(apiResponse.isSuccess()?apiResponse.getObject():apiResponse);
     }
 
 
-
     /**
-     * ADD NEW LANGUAGE WITH LANGUAGE_DTO
-     * @param languageDto
+     * ADD NEW USER WITH USER_DTO
+     * @param userDto
      * @return ApiResponse
      */
     @PostMapping
-    public ResponseEntity<?> add(@Valid @RequestBody LanguageDto languageDto){
-        ApiResponse apiResponse = languageService.add(languageDto);
+    public ResponseEntity<?> add(@Valid @RequestBody UserDto userDto){
+        ApiResponse apiResponse = userService.add(userDto);
         return ResponseEntity.status(apiResponse.isSuccess()?201:409).body(apiResponse);
     }
 
 
-
     /**
-     * DELETE LANGUAGE WITH ID
+     * DELETE USER WITH ID
      * @param id
      * @return ApiResponse
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id){
-        ApiResponse apiResponse = languageService.delete(id);
-        return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
+        ApiResponse apiResponse = userService.delete(id);
+        return ResponseEntity.status(apiResponse.isSuccess()?200:404).body(apiResponse);
     }
-
 
 
     /**
-     * EDIT LANGUAGE WITH ID AND LANGUAGE_DTO
+     * EDIT USER WITH ID AND USER_DTO
      * @param id
-     * @param languageDto
+     * @param userDto
      * @return ApiResponse
      */
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit(@PathVariable Integer id, @Valid @RequestBody LanguageDto languageDto){
-        ApiResponse apiResponse = languageService.edit(id, languageDto);
+    public ResponseEntity<?> edit(@PathVariable Integer id,@Valid @RequestBody UserDto userDto){
+        ApiResponse apiResponse = userService.edit(id, userDto);
         return ResponseEntity.status(apiResponse.isSuccess()?200:409).body(apiResponse);
     }
+
 
 
 

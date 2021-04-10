@@ -1,0 +1,63 @@
+GET http://localhost:8080/language
+###
+POST http://localhost:8080/language
+Content-Type: application/json
+
+{
+  "name": "Python"
+}
+###
+GET http://localhost:8080/category
+###
+POST http://localhost:8080/category
+Content-Type: application/json
+
+{
+  "name": "Logic-1",
+  "dicription": "Bu mantiq bo'yicha",
+  "languageId": 2
+}
+###
+GET http://localhost:8080/task
+###
+POST http://localhost:8080/task
+Content-Type: application/json
+
+{
+  "name": "1-string",
+  "text": "stringlarni qo'shish",
+  "method": "public String add(String s1, String s2){  }",
+  "hasStar": true,
+  "categoryId": 4
+}
+###
+GET http://localhost:8080/example
+###
+POST http://localhost:8080/example
+Content-Type: application/json
+
+{
+  "text": "qo'shish",
+  "taskId": 1
+}
+###
+GET http://localhost:8080/user
+###
+POST http://localhost:8080/user
+Content-Type: application/json
+
+{
+  "email": "12131@",
+  "password": "123456789"
+}
+###
+GET http://localhost:8080/answer
+###
+POST http://localhost:8080/answer
+Content-Type: application/json
+
+{
+  "text": "my answer",
+  "userId":1,
+  "taskId": 1
+}

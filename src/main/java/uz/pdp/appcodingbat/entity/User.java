@@ -3,6 +3,7 @@ package uz.pdp.appcodingbat.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
@@ -19,6 +20,14 @@ public class User {
     private String email;
 
 
-    @Column(nullable = false,length = 8)
+    @Column(nullable = false)
     private String password;
+
+    private boolean active=true;
+
+
+    public User(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
 }

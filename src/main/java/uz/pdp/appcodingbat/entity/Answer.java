@@ -25,4 +25,13 @@ public class Answer {
 
     @ManyToOne
     private Task task;
+
+    private boolean active=true;
+
+
+    public Answer(String text, User user, Task task) {
+        this.text = text;
+        this.user = user;
+        this.task = task;
+    }
 }
